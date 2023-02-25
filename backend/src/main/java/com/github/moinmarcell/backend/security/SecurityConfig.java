@@ -49,8 +49,7 @@ public class SecurityConfig extends AbstractSecurityWebApplicationInitializer {
                         .requestMatchers(request -> !request.getRequestURI().contains("/api") &&
                                 request.getMethod().matches(HttpMethod.GET.name())).permitAll()
                         .requestMatchers("/api/users/me").permitAll()
-                        .requestMatchers("/api/guestbook-entries").permitAll()
-                        .requestMatchers("/api/guestbook-entries/{id}").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/api/guestbook-entries").permitAll()
                         .anyRequest().authenticated()
                 )
                 .logout(logout -> logout

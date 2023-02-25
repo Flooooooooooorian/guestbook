@@ -1,24 +1,29 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, {useEffect, useState} from 'react';
 import './App.css';
+import {Route, Routes} from "react-router-dom";
+import EntryGallery from "./EntryGallery";
+import axios from "axios";
+import {GuestbookEntry} from "./GuestbookEntry";
 
 function App() {
+
+    const [entries, setEntries] = useState<GuestbookEntry[]>([])
+
+  useEffect(() => {
+    axios.get("/api/guestbook-entries")
+        .then((response) => {
+            setEntries(response.data);
+        })
+        .catch((error) => {
+            console.error(error);
+        });
+  });
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Routes>
+        <Route path={"/"} element={<EntryGallery entries={entries} />} />
+      </Routes>
     </div>
   );
 }

@@ -28,6 +28,6 @@ public class GuestbookEntryController {
 
     @PutMapping("/{id}")
     public GuestbookEntry updateEntry(@PathVariable String id, @RequestBody GuestbookEntry guestbookEntryToUpdate){
-        return service.updateGuestbookEntry(guestbookEntryToUpdate);
+        return service.updateGuestbookEntry(id, guestbookEntryToUpdate);
     }
 }

@@ -8,14 +8,19 @@ type EntryGalleryProps = {
 
 export default function EntryGallery(props: EntryGalleryProps){
     const entryCard = props.entries.map((entry) => {
-        return(
-            <EntryCard entry={entry} key={entry.id} />
+        return (
+            <EntryCard entry={entry} key={entry.id}/>
         );
     }).reverse();
 
-    return(
+    function handleLoginWithGitHubClick() {
+        window.open("https://github.com/login/oauth/authorize?client_id=68f4dcabd39a63affbb1&scope=user", "_self");
+    }
+
+    return (
         <div>
-            <AddEntry />
+            <button onClick={handleLoginWithGitHubClick}>Login with GitHub</button>
+            <AddEntry/>
             {entryCard}
         </div>
     );

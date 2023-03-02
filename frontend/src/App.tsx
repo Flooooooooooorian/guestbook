@@ -4,7 +4,6 @@ import {Route, Routes} from "react-router-dom";
 import EntryGallery from "./EntryGallery";
 import axios from "axios";
 import {GuestbookEntry} from "./GuestbookEntry";
-import GitHubRedirectPage from "./GitHubRedirectPage";
 
 function App() {
 
@@ -24,7 +23,6 @@ function App() {
         <div className="App">
             <Routes>
                 <Route path={"/"} element={<EntryGallery entries={entries}/>}/>
-                <Route path={"/users/oauth/github"} element={<GitHubRedirectPage/>}/>
             </Routes>
         </div>
     );

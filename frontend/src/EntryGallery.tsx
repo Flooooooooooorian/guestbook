@@ -13,13 +13,10 @@ export default function EntryGallery(props: EntryGalleryProps){
         );
     }).reverse();
 
-    function handleLoginWithGitHubClick() {
-        window.open("https://github.com/login/oauth/authorize?client_id=68f4dcabd39a63affbb1&scope=user", "_self");
-    }
-
     return (
         <div>
-            <button onClick={handleLoginWithGitHubClick}>Login with GitHub</button>
+            <button>Register</button>
+            <button>Login</button>
             <AddEntry/>
             {entryCard}
         </div>

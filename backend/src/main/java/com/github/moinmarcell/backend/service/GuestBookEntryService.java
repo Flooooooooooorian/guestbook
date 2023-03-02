@@ -5,7 +5,6 @@ import com.github.moinmarcell.backend.repository.GuestbookEntryRepository;
 import org.springframework.stereotype.Service;
 
 import java.time.ZonedDateTime;
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -19,22 +18,33 @@ public class GuestBookEntryService {
         this.idService = idService;
     }
 
-    public List<GuestbookEntry> getAllGuestbookEntries(){
-        return new ArrayList<>(guestbookEntryRepository.getGuestbookEntries().values());
+    public List<GuestbookEntry> getAllGuestbookEntries() {
+        return guestbookEntryRepository.findAll();
     }
 
-    public GuestbookEntry addGuestbookEntry(GuestbookEntry guestbookEntryToAdd){
-        return guestbookEntryRepository.addGuestbookEntry(new GuestbookEntry(
+    public GuestbookEntry addGuestbookEntry(GuestbookEntry guestbookEntryToAdd) {
+        GuestbookEntry toAdd = new GuestbookEntry(
                 idService.generateId(),
                 guestbookEntryToAdd.title(),
                 guestbookEntryToAdd.content(),
                 ZonedDateTime.now(),
                 guestbookEntryToAdd.author()
-        ));
+        );
+        guestbookEntryRepository.save(toAdd);
+        return toAdd;
     }
 
-    public GuestbookEntry updateGuestbookEntry(GuestbookEntry guestbookEntryToUpdate){
-        return guestbookEntryRepository.updateGuestbookEntry(guestbookEntryToUpdate);
+    public GuestbookEntry updateGuestbookEntry(String id, GuestbookEntry guestbookEntryToUpdate) {
+        GuestbookEntry toUpdate = new GuestbookEntry(
+                id,
+                guestbookEntryToUpdate.title(),
+                guestbookEntryToUpdate.content(),
+                guestbookEntryToUpdate.dateTime(),
+                guestbookEntryToUpdate.author()
+        );
+
+        guestbookEntryRepository.save(toUpdate);
+        return toUpdate;
     }
 
 }
